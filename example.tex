@@ -1,0 +1,139 @@
+% \documentclass[letterpaper]{dapper-invoice}
+%\documentclass[letterpaper,currency=dollar]{dapper-invoice}
+\documentclass[letterpaper,
+%<{"description": "Select your currency", "placeholder": "euro", "type": "dropdown", "values": ["euro", "dollar", "pound"]}
+currency={euro}
+%>
+]{dapper-invoice}
+%\documentclass[letterpaper,currency=pound]{dapper-invoice}
+
+\newcommand{\invoiceNo}
+{101} %<{"type": "text", "description": "invoice number"}>
+\newcommand{\duein}
+{15} %<{"type": "number", "description": "Number of days until due date", "isInteger": true}>
+
+\newcommand{\me}
+{Your~Name} %<{"type": "text", "description": "Your name"}>
+\newcommand{\clientName}
+{Sample~Client} %<{"type": "text", "description": "Client name"}>
+
+\setmetadata{\me}
+{Your Biz}%<{"type": "text", "description": "Your business", "id":"business"}>
+{\invoiceNo}{\clientName}
+
+\defaultfontfeatures{ Path = ./Fonts/ }
+\usepackage{fontawesome}
+
+
+\begin{document}
+
+\newfontface\mainLightItalic{OpenSans-LightItalic}
+\makeheader
+{Your\ \mainLightItalic Biz}%<{"type": "reference", "id":"business"}>
+{\invoiceNo}
+
+%-------- collect user information to do calculations beforehand ----------
+
+
+%<{"description": "List of services provided", "type": "list", "id": "listId"}
+    %<{"description": "Service", "type": "group", "id": "groupId"}
+        \lineitempWithoutOutput{2015/4/11} %<{"type":"date", "description": "Service date", "id": "Service date"}>
+        {2}%<{"type":"number", "description": "Number of hours", "id": "Number of hours", "noComma": true}>
+        {40}%<{"type":"number", "description": "Payment per hour", "id": "Payment per hour", "noComma": true}>
+        {Invoice}%<{"type":"text", "description": "Project name", "id": "Project name"}>
+        {Discussed requirements with client}%<{"type":"text", "description": "Service description", "id": "Service description"}>
+    %>
+    \lineitempWithoutOutput{2015/4/11}{1.25}{50}{Invoice}{
+    \item Wrote Invoice in LaTeX}
+
+    \lineitempWithoutOutput{2015/4/11}{0.5}{50}{Invoice}{
+    \item Packaged Invoice in .cls file}
+%>
+
+%-------- collect user information to do calculations beforehand ----------
+
+%<{"type": "group", "description": "Client information"}
+\twocolumnlayout{
+\begin{infoSection}
+    \infoBox{Client}{\clientName \\
+     {123 Street Address} \\ %<{"type":"text", "description": "Client address"}>
+     {City, State 55555} %<{"type":"text", "description": "City and country/state"}>
+     }
+    \infoBox{Project}
+    {\#123.456} %<{"type":"text", "description": "Project number or id"}>
+    \infoBox{Contact}
+    {Jane Smith} %<{"type":"text", "description": "Client contact name"}>
+    \infoSub{\faMobilePhone}{\small\slshape 
+    {+1~(555)~555-5555} %<{"type":"phonenumber", "description": "Client contact phone number"}>
+    }
+    \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink
+    {client@example.com} %<{"type":"email", "description": "Client email address"}>
+    }
+    \noalign{\addvspace{8ex}}
+    \infoBox{}{
+        {\huge\currencysym\formatcurrency{\InvoiceTotal}
+\arrowbase} \\
+        {\small\color{subduedColor} due \duedate{\duein}}
+    }
+\end{infoSection}
+%>
+}
+%<{"type": "group", "description": "Your own details"}
+{
+\begin{infoSection}
+    \infoBox{\arrowtarget Payable To}{
+        \me \\
+        {1234 Sycamore Ave} \\ %<{"type":"text", "description": "Your address"}>
+        {Blacksburg, VA 24060} %<{"type":"text", "description": "Your city and country/state"}>
+    }
+    \infoSub{\faMobilePhone}{\small\slshape 
+    {+1~(555)~555-5555} %<{"type":"phonenumber", "description": "Your phone number"}>
+    }
+    \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink
+    {you@example.com} %<{"type":"email", "description": "Your email address"}>
+    }
+\end{infoSection}
+\drawarrow
+}
+%>
+\addvspace{4ex}
+
+\begin{hoursItemizationWithProject}
+
+%----------------- reference -------------------
+
+%<{"type": "reference", "id": "listId"}
+    %<{"type": "reference", "id": "groupId"}
+        \lineitempWithoutCalc{2015/4/11} %<{"type":"reference", "id": "Service date"}>
+        {2}%<{"type":"reference", "id": "Number of hours"}>
+        {40}%<{"type":"reference", "id": "Payment per hour"}>
+        {Invoice}%<{"type":"reference", "id": "Project name"}>
+        {
+            {
+                \item{Discussed requirements with client}%<{"type":"reference", "id": "Service description"}>
+            }
+        }
+    %>
+%>
+%---------------- reference -------------------
+
+
+%-------------- list only meant for preview ---------------
+
+%<{"type": "preview"}
+\lineitempWithoutCalc{2015/4/11}{1.25}{50}{Invoice}{
+    \item Wrote Invoice in LaTeX}
+
+\lineitempWithoutCalc{2015/4/11}{0.5}{50}{Invoice}{
+    \item Packaged Invoice in .cls file}
+%>
+
+%--------------- list only meant for preview -------------------
+
+\beginsummary
+
+\summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
+
+\end{hoursItemizationWithProject}
+
+\end{document}
