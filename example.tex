@@ -9,11 +9,20 @@
     %    placeholder: "Paper size",
     %    type: "dropdown",
     %    values: ["letterpaper", "a4paper"],
+    %    labels: ["US Letter", "A4"],
     %    id: "paperSize"
     % }
     %>
     
-    %<{description: "Currency", placeholder: "Currency", type: "dropdown", values: ["euro", "dollar", "pound"], id: "currency"}>
+    %<{
+    %     description: "Currency",
+    %     placeholder: "Currency",
+    %     type: "dropdown",
+    %     values: ["euro", "dollar", "pound"],
+    %     labels: ["Euro", "US Dollar", "UK Pound"],
+    %     id: "currency"
+    % }
+    %>
     
     %<{type: "text", description: "invoice number", id: "invoiceNumber"}>
     
