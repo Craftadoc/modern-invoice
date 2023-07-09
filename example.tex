@@ -10,7 +10,8 @@
     %    type: "dropdown",
     %    values: ["letterpaper", "a4paper"],
     %    labels: ["US Letter", "A4"],
-    %    id: "paperSize"
+    %    id: "paperSize",
+    %    inputValue: "letterpaper"
     % }
     %>
     
@@ -20,32 +21,33 @@
     %     type: "dropdown",
     %     values: ["euro", "dollar", "pound"],
     %     labels: ["Euro", "US Dollar", "UK Pound"],
-    %     id: "currency"
+    %     id: "currency",
+    %     inputValue: "euro"
     % }
     %>
     
-    %<{type: "text", description: "invoice number", id: "invoiceNumber"}>
+    %<{type: "text", description: "invoice number", id: "invoiceNumber", inputValue: "101"}>
     
-    %<{type: "number", description: "Number of days until due date", isInteger: true, id: "numberOfDaysDue"}>
+    %<{type: "number", description: "Number of days until due date", isInteger: true, id: "numberOfDaysDue", inputValue: 15}>
 %>
     
 %<{type: "group", description: "Business information"}
-    %<{type: "text", description: "Business name", id: "business"}>
-    %<{type: "text", description: "Your full name", id: "yourName"}>
-    %<{type: "text", description: "House number and street", id: "businessStreet"}>
-    %<{type: "text", description: "City and country/state", id: "businessCountry"}>
-    %<{type: "phonenumber", description: "Phone number", id: "businessPhoneNumber"}>
-    %<{type: "email", description: "Email address", id: "businessEmail"}>
+    %<{type: "text", description: "Business name", id: "business", inputValue: "Your Biz"}>
+    %<{type: "text", description: "Your full name", id: "yourName", inputValue: "Your-Name"}>
+    %<{type: "text", description: "House number and street", id: "businessStreet", inputValue: "1234 Sycamore Ave"}>
+    %<{type: "text", description: "City and country/state", id: "businessCountry", inputValue: "Blacksburg, VA 24060"}>
+    %<{type: "phonenumber", description: "Phone number", id: "businessPhoneNumber", inputValue: "+1~(555)~555-5555"}>
+    %<{type: "email", description: "Email address", id: "businessEmail", inputValue: "you@example.com"}>
 %>
     
 %<{type: "group", description: "Client information"}
-    %<{type: "text", description: "Client name", id: "clientName"}>
-    %<{type: "text", description: "House number and street", id: "clientStreet"}>
-    %<{type: "text", description: "City and country/state", id: "clientCountry"}>
-    %<{type: "text", description: "Project number or id", id: "projectId"}>
-    %<{type: "text", description: "Client contact name", id: "clientContact"}>
-    %<{type: "phonenumber", description: "Client contact phone number", id: "clientPhone"}>
-    %<{type: "email", description: "Client email address", id: "clientEmail"}>
+    %<{type: "text", description: "Client name", id: "clientName", inputValue: "Sample~Client"}>
+    %<{type: "text", description: "House number and street", id: "clientStreet", inputValue: "123 Street Address"}>
+    %<{type: "text", description: "City and country/state", id: "clientCountry", inputValue: "City, State 55555"}>
+    %<{type: "text", description: "Project number or id", id: "projectId", inputValue: "#123.456"}>
+    %<{type: "text", description: "Client contact name", id: "clientContact", inputValue: "Jane Smith"}>
+    %<{type: "phonenumber", description: "Client contact phone number", id: "clientPhone", inputValue: "+1~(555)~555-5555"}>
+    %<{type: "email", description: "Client email address", id: "clientEmail", inputValue: "client@example.com"}>
 %>
 }
 
@@ -89,17 +91,26 @@ currency={euro} %<{type: "reference", id: "currency"}>
 
 %<{"description": "List of services provided", "type": "list", "id": "listId"}
     %<{"description": "Service", "type": "group", "id": "groupId"}
-        \lineitempWithoutOutput{2015/4/11} %<{"type":"date", "description": "Service date", "id": "Service date"}>
-        {2}%<{"type":"number", "description": "Number of hours", "id": "Number of hours", "noComma": true}>
-        {40}%<{"type":"number", "description": "Payment per hour", "id": "Payment per hour", "noComma": true}>
-        {Invoice}%<{"type":"text", "description": "Project name", "id": "Project name"}>
-        {Discussed requirements with client}%<{"type":"text", "description": "Service description", "id": "Service description"}>
+        \lineitempWithoutOutput{2015/4/11} %<{"type":"text", "description": "Service date", "id": "Service date", inputValue: "2015/4/11"}>
+        {2}%<{"type":"number", "description": "Number of hours", "id": "Number of hours", "noComma": true, inputValue: 2}>
+        {40}%<{"type":"number", "description": "Payment per hour", "id": "Payment per hour", "noComma": true, inputValue: 40}>
+        {Invoice}%<{"type":"text", "description": "Project name", "id": "Project name", inputValue: "Invoice"}>
+        {Discussed requirements with client}%<{"type":"text", "description": "Service description", "id": "Service description", inputValue: "Discussed requirements with client"}>
     %>
-    \lineitempWithoutOutput{2015/4/11}{1.25}{50}{Invoice}{
-    \item Wrote Invoice in LaTeX}
-
-    \lineitempWithoutOutput{2015/4/11}{0.5}{50}{Invoice}{
-    \item Packaged Invoice in .cls file}
+    %<{"description": "Service", "type": "group", "id": "groupId"}
+        \lineitempWithoutOutput{2015/4/11} %<{"type":"text", "description": "Service date", "id": "Service date", inputValue: "2015/4/11"}>
+        {1.25}%<{"type":"number", "description": "Number of hours", "id": "Number of hours", "noComma": true, inputValue: 1.25}>
+        {50}%<{"type":"number", "description": "Payment per hour", "id": "Payment per hour", "noComma": true, inputValue: 50}>
+        {Invoice}%<{"type":"text", "description": "Project name", "id": "Project name", inputValue: "Invoice"}>
+        {Wrote Invoice in LaTeX}%<{"type":"text", "description": "Service description", "id": "Service description", inputValue: "Wrote Invoice in LaTeX"}>
+    %>
+    %<{"description": "Service", "type": "group", "id": "groupId"}
+        \lineitempWithoutOutput{2015/4/11} %<{"type":"text", "description": "Service date", "id": "Service date", inputValue: "2015/4/11"}>
+        {0.5}%<{"type":"number", "description": "Number of hours", "id": "Number of hours", "noComma": true, inputValue: 0.5}>
+        {50}%<{"type":"number", "description": "Payment per hour", "id": "Payment per hour", "noComma": true, inputValue: 50}>
+        {Invoice}%<{"type":"text", "description": "Project name", "id": "Project name", inputValue: "Invoice"}>
+        {Packaged Invoice in .cls file}%<{"type":"text", "description": "Service description", "id": "Service description", inputValue: "Packaged Invoice in .cls file"}>
+    %>
 %>
 
 %-------- collect user information to do calculations beforehand ----------
